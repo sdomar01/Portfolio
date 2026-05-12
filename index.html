@@ -1,0 +1,562 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Sadhan Omar | Virtual Assistant Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:#060e1f;color:#e2f0f9;line-height:1.6;overflow-x:hidden}
+a{text-decoration:none}
+img{max-width:100%;display:block}
+
+/* ── Noise texture ── */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:0.4}
+
+/* ── Nav ── */
+nav{position:fixed;top:0;width:100%;z-index:998;padding:18px 60px;display:flex;justify-content:space-between;align-items:center;background:rgba(6,14,31,0.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(20,184,166,0.12);transition:all 0.3s}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:0.08em;color:#14b8a6;cursor:pointer}
+nav ul{list-style:none;display:flex;gap:36px}
+nav a{color:#6b94b8;font-size:0.76rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;transition:color 0.2s}
+nav a:hover{color:#14b8a6}
+
+/* ── Hero — split ── */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:120px 60px 80px;gap:60px;position:relative;overflow:hidden;background:#060e1f}
+.hero-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.hero-content,.hero-visual{position:relative;z-index:2}
+
+/* ── Hero — centered (bold) ── */
+.hero.hero-c{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:140px 40px 100px}
+.hero.hero-c .hero-bio-text{margin-left:auto;margin-right:auto}
+.hero.hero-c .hero-contacts{justify-content:center}
+.hero-blobs{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.18;animation:blobPulse 8s ease-in-out infinite alternate}
+.blob-1{width:500px;height:500px;background:#14b8a6;top:-150px;left:-100px}
+.blob-2{width:400px;height:400px;background:#818cf8;bottom:-100px;right:-80px;animation-delay:-4s}
+
+/* ── Eyebrow label ── */
+.eyebrow{font-size:0.72rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#14b8a6;margin-bottom:22px;display:flex;align-items:center;gap:12px}
+.eyebrow-c{justify-content:center}
+.eyebrow::before{content:'';width:32px;height:2px;background:#14b8a6;box-shadow:0 0 10px rgba(20,184,166,0.55);flex-shrink:0}
+.eyebrow-c::before{display:none}
+
+/* ── Hero name ── */
+h1.hero-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.6rem,6.5vw,6rem);line-height:0.88;letter-spacing:0.03em;margin-bottom:18px}
+h1.hero-name .hl{color:#14b8a6;text-shadow:0 0 22px rgba(20,184,166,0.45),0 0 55px rgba(20,184,166,0.15)}
+
+/* ── Hero role tag ── */
+.role-tag{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(20,184,166,0.4);background:rgba(20,184,166,0.08);color:#14b8a6;font-size:0.78rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;padding:7px 18px;border-radius:3px;margin-bottom:28px}
+
+/* ── Hero bio ── */
+.hero-bio-text{font-size:1.05rem;color:#6b94b8;max-width:460px;line-height:1.85;margin-bottom:36px}
+
+/* ── Hero contacts ── */
+.hero-contacts{display:flex;flex-wrap:wrap;gap:20px;margin-bottom:36px}
+.contact-item{display:flex;align-items:center;gap:7px;color:#6b94b8;font-size:0.82rem;font-weight:500;transition:color 0.2s}
+.contact-item:hover{color:#14b8a6}
+
+/* ── Strength tags in hero ── */
+.s-tags{display:flex;flex-wrap:wrap;gap:9px;margin-top:28px}
+.s-tag{border:1px solid rgba(20,184,166,0.3);background:rgba(20,184,166,0.07);color:#14b8a6;padding:5px 16px;border-radius:999px;font-size:0.76rem;font-weight:700;letter-spacing:0.06em;transition:all 0.25s}
+.s-tag:hover{background:rgba(20,184,166,0.16);box-shadow:0 0 10px rgba(20,184,166,0.55)}
+
+/* ── Hero photo (split) ── */
+.hero-visual{display:flex;justify-content:center;align-items:center}
+.photo-wrap{position:relative}
+.photo-wrap::before{content:'';position:absolute;inset:-3px;clip-path:polygon(8% 0%,100% 0%,92% 100%,0% 100%);background:#14b8a6;box-shadow:0 0 40px rgba(20,184,166,0.6),0 0 90px rgba(20,184,166,0.2);z-index:0}
+.hero-photo{width:100%;max-width:440px;display:block;clip-path:polygon(8% 0%,100% 0%,92% 100%,0% 100%);filter:contrast(1.04) saturate(1.05);position:relative;z-index:1}
+.photo-initials{width:340px;height:380px;clip-path:polygon(8% 0%,100% 0%,92% 100%,0% 100%);background:linear-gradient(135deg,rgba(20,184,166,0.25),rgba(20,184,166,0.05));display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:7rem;color:#14b8a6;text-shadow:0 0 22px rgba(20,184,166,0.45),0 0 55px rgba(20,184,166,0.15);position:relative;z-index:1}
+.neon-bar{position:absolute;left:-20px;top:50%;transform:translateY(-50%);width:4px;height:55%;background:#14b8a6;box-shadow:0 0 40px rgba(20,184,166,0.6),0 0 90px rgba(20,184,166,0.2);border-radius:2px}
+
+/* ── Hero photo (centered) ── */
+.photo-center-wrap{position:relative;margin-bottom:32px}
+.photo-center-wrap::before{content:'';position:absolute;inset:-4px;clip-path:polygon(8% 0%,100% 0%,92% 100%,0% 100%);background:linear-gradient(135deg,#14b8a6,#818cf8);z-index:0}
+.hero-photo-c{width:180px;height:180px;clip-path:polygon(8% 0%,100% 0%,92% 100%,0% 100%);object-fit:cover;position:relative;z-index:1}
+.photo-center-init{width:180px;height:180px;clip-path:polygon(8% 0%,100% 0%,92% 100%,0% 100%);background:rgba(20,184,166,0.15);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:4rem;color:#14b8a6;position:relative;z-index:1}
+
+/* ── Stats strip ── */
+.stats{background:#0a1628;border-top:1px solid rgba(20,184,166,0.14);border-bottom:1px solid rgba(20,184,166,0.14);padding:48px 60px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:#14b8a6;text-shadow:0 0 22px rgba(20,184,166,0.45),0 0 55px rgba(20,184,166,0.15);display:block;line-height:1}
+.stat-label{font-size:0.72rem;color:#6b94b8;letter-spacing:0.14em;text-transform:uppercase;margin-top:6px;display:block}
+
+/* ── Section base ── */
+.sec{padding:96px 60px;position:relative}
+.sec.alt{background:#0b1628}
+.wrap{max-width:1100px;margin:0 auto}
+.sec-head{margin-bottom:60px}
+.sec-ey{font-size:0.7rem;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;color:#14b8a6;margin-bottom:14px;display:flex;align-items:center;gap:12px}
+.sec-ey::before{content:'';width:24px;height:2px;background:#14b8a6;box-shadow:0 0 10px rgba(20,184,166,0.55);flex-shrink:0}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,4.5vw,3.6rem);line-height:0.95;letter-spacing:0.04em;margin-bottom:16px}
+.sec-desc{color:#6b94b8;font-size:1rem;line-height:1.8;max-width:560px}
+
+/* ── Skill cards (strengths) ── */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.skill-card{background:#0e1c35;padding:42px 36px;position:relative;overflow:hidden;transition:background 0.3s;cursor:default}
+.skill-card:hover{background:#0b1628}
+.skill-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:#14b8a6;box-shadow:0 0 22px rgba(20,184,166,0.45),0 0 55px rgba(20,184,166,0.15);opacity:0;transition:opacity 0.3s}
+.skill-card:hover::before{opacity:1}
+.skill-num{font-family:'Bebas Neue',sans-serif;font-size:5rem;color:rgba(20,184,166,0.06);position:absolute;top:10px;right:16px;line-height:1;pointer-events:none}
+.skill-icon{font-size:2.2rem;margin-bottom:20px;display:block}
+.skill-title{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:0.04em;margin-bottom:18px;color:#e2f0f9}
+.skill-list{list-style:none}
+.skill-list li{font-size:0.86rem;color:#6b94b8;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px}
+.skill-list li::before{content:'→';color:#14b8a6;font-size:0.8rem;flex-shrink:0}
+.skill-list li:last-child{border-bottom:none}
+
+/* ── Tools — marquee ── */
+.marquee-wrap{position:relative;overflow:hidden;padding:12px 0}
+.marquee-wrap::before,.marquee-wrap::after{content:'';position:absolute;top:0;bottom:0;width:120px;z-index:2;pointer-events:none}
+.marquee-wrap::before{left:0;background:linear-gradient(to right,#060e1f,transparent)}
+.marquee-wrap::after{right:0;background:linear-gradient(to left,#060e1f,transparent)}
+.marquee-row{display:flex;gap:12px;width:max-content;margin-bottom:12px}
+.marquee-row:last-child{margin-bottom:0}
+.mq-left{animation:mqLeft 32s linear infinite}
+.mq-right{animation:mqRight 40s linear infinite}
+.tool-chip{display:inline-flex;align-items:center;gap:9px;padding:9px 20px;background:#0e1c35;border:1px solid rgba(20,184,166,0.18);border-radius:999px;white-space:nowrap;font-size:13px;font-weight:600;color:#6b94b8;transition:border-color 0.25s,color 0.25s;flex-shrink:0;cursor:default}
+.tool-chip:hover{border-color:rgba(20,184,166,0.55);color:#e2f0f9}
+.chip-icon{width:20px;height:20px;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
+.chip-icon img{width:14px;height:14px;object-fit:contain;display:block}
+.chip-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;opacity:0.85}
+@keyframes mqLeft{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes mqRight{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
+
+/* ── Certificates ── */
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:24px}
+.cert-card{background:#0e1c35;border:1px solid rgba(255,255,255,0.06);border-radius:16px;overflow:hidden;transition:all 0.3s;}
+.cert-card:hover{border-color:rgba(20,184,166,0.4);box-shadow:0 8px 40px rgba(20,184,166,0.12);transform:translateY(-4px)}
+.cert-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.cert-ph{width:100%;aspect-ratio:4/3;background:rgba(20,184,166,0.06);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border-bottom:1px solid rgba(255,255,255,0.05)}
+.cert-ph span{font-size:3rem}
+.cert-ph p{font-size:0.8rem;color:#6b94b8}
+.cert-body{padding:18px 20px}
+.cert-name{font-weight:800;font-size:15px;color:#e2f0f9;margin-bottom:5px}
+.cert-issuer{font-size:12px;color:#6b94b8}
+
+/* ── Testimonials ── */
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+.testi-card{background:#0e1c35;border:1px solid rgba(255,255,255,0.06);border-radius:18px;padding:30px;transition:all 0.3s;position:relative;overflow:hidden;}
+.testi-card:hover{border-color:rgba(20,184,166,0.35);box-shadow:0 6px 36px rgba(20,184,166,0.1)}
+.testi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#14b8a6,transparent);opacity:0;transition:opacity 0.3s}
+.testi-card:hover::before{opacity:1}
+.testi-qm{font-size:56px;line-height:1;color:#14b8a6;text-shadow:0 0 10px rgba(20,184,166,0.55);font-family:Georgia,serif;margin-bottom:12px}
+.testi-text{font-size:0.9rem;color:#6b94b8;line-height:1.85;font-style:italic;margin-bottom:24px}
+.testi-author{display:flex;align-items:center;gap:14px}
+.testi-av{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,rgba(20,184,166,0.6),rgba(20,184,166,0.2));display:flex;align-items:center;justify-content:center;color:#14b8a6;font-weight:800;font-size:14px;flex-shrink:0;border:1px solid rgba(20,184,166,0.3)}
+.testi-name{font-weight:800;font-size:14px;color:#e2f0f9}
+.testi-role{font-size:11.5px;color:#6b94b8;margin-top:2px}
+
+/* ── Creatives ── */
+.sub-head{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.04em;color:#e2f0f9;margin-bottom:24px;margin-top:52px;display:flex;align-items:center;gap:14px}
+.sub-head::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.07)}
+.sub-head:first-child{margin-top:0}
+.video-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:24px}
+.video-wrap{border-radius:14px;overflow:hidden;aspect-ratio:16/9;background:#000;position:relative;display:flex;flex-direction:column}
+.video-wrap iframe{width:100%;height:100%;display:block;border:none;flex:1}
+.video-wrap video{flex:1}
+.vid-cap{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.8));padding:20px 14px 12px;color:#fff;font-size:12px;font-weight:600;pointer-events:none}
+.vid-ph{border-radius:14px;aspect-ratio:16/9;background:#0e1c35;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border:1px dashed rgba(20,184,166,0.2)}
+.vid-ph span{font-size:3rem}
+.vid-ph p{font-size:0.8rem;color:#6b94b8;font-weight:600}
+.poster-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.poster-card{border-radius:14px;overflow:hidden;aspect-ratio:3/4;position:relative;background:#0e1c35;border:1px dashed rgba(20,184,166,0.2);display:flex;align-items:center;justify-content:center;transition:transform 0.3s}
+.poster-card:hover{transform:scale(1.02)}
+.poster-card img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.poster-cap{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.75));padding:20px 14px 14px;color:#fff;font-size:12px;font-weight:600}
+.poster-ph{display:flex;flex-direction:column;align-items:center;gap:8px;position:relative;z-index:1}
+.poster-ph span{font-size:2.5rem}
+.poster-ph p{font-size:0.75rem;color:#6b94b8;font-weight:600;text-align:center}
+
+/* ── CTA section ── */
+.cta{background:#0b1628;padding:110px 60px;text-align:center;position:relative;overflow:hidden}
+.cta-ghost{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(8rem,18vw,18rem);color:rgba(20,184,166,0.04);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;letter-spacing:0.05em;line-height:1}
+.cta-inner{position:relative;z-index:2}
+.cta-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,5.5rem);line-height:0.92;margin-bottom:24px;letter-spacing:0.04em}
+.cta-title .hl{color:#14b8a6;text-shadow:0 0 22px rgba(20,184,166,0.45),0 0 55px rgba(20,184,166,0.15)}
+.cta-sub{color:#6b94b8;font-size:1.05rem;line-height:1.8;max-width:540px;margin:0 auto 52px}
+.contact-links{display:flex;justify-content:center;gap:36px;flex-wrap:wrap;margin-bottom:44px}
+.cl-item{display:flex;flex-direction:column;align-items:center;gap:6px;color:#6b94b8;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s;cursor:pointer}
+.cl-item:hover{color:#14b8a6}
+.cl-icon{font-size:1.6rem}
+
+/* ── Footer ── */
+.footer{background:#060e1f;border-top:1px solid rgba(255,255,255,0.05);padding:44px 60px;text-align:center}
+.footer-name{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:0.1em;color:#14b8a6;text-shadow:0 0 10px rgba(20,184,166,0.55);margin-bottom:10px}
+.footer p{color:#6b94b8;font-size:13px}
+.footer strong{color:#14b8a6}
+
+/* ── Hero entrance animations ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeRight{from{opacity:0;transform:translateX(36px)}to{opacity:1;transform:translateX(0)}}
+@keyframes blobPulse{0%{transform:scale(1) translate(0,0)}100%{transform:scale(1.15) translate(30px,20px)}}
+.ha1{animation:fadeUp 0.65s ease 0.1s both}
+.ha2{animation:fadeUp 0.75s ease 0.25s both}
+.ha3{animation:fadeUp 0.6s ease 0.4s both}
+.ha4{animation:fadeUp 0.6s ease 0.5s both}
+.ha5{animation:fadeUp 0.6s ease 0.62s both}
+.ha6{animation:fadeUp 0.6s ease 0.72s both}
+.hv{animation:fadeRight 0.8s ease 0.3s both}
+
+/* ── Responsive ── */
+@media(max-width:900px){
+  nav{padding:16px 24px}
+  nav ul{display:none}
+  .hero,.hero.hero-c{grid-template-columns:1fr;padding:100px 24px 60px;gap:40px;display:flex;flex-direction:column;text-align:center}
+  .hero-contacts,.s-tags{justify-content:center}
+  .eyebrow{justify-content:center}
+  .eyebrow::before{display:none}
+  .photo-wrap{margin:0 auto}
+  .neon-bar{display:none}
+  .stats{grid-template-columns:repeat(2,1fr);padding:40px 24px}
+  .sec{padding:72px 24px}
+  .skills-grid{grid-template-columns:1fr}
+  .poster-grid{grid-template-columns:1fr}
+  .cta{padding:72px 24px}
+  .contact-links{gap:24px}
+  .footer{padding:36px 24px}
+}
+
+/* ══ BOLD TEMPLATE OVERRIDES ══════════════════════════════════════════ */
+
+/* Bigger, more dramatic section & hero titles */
+body.theme-bold .sec-title{font-size:clamp(3.4rem,6.5vw,5.8rem);letter-spacing:0.06em;line-height:0.9}
+body.theme-bold h1.hero-name{font-size:clamp(3.8rem,7vw,7rem);line-height:0.85;letter-spacing:0.04em}
+body.theme-bold .cta-title{font-size:clamp(3.6rem,8vw,6.5rem)}
+body.theme-bold .stat-num{font-size:3.8rem;text-shadow:0 0 30px rgba(20,184,166,0.8),0 0 60px rgba(20,184,166,0.4)}
+
+/* Hero name highlight — warm pulse glow */
+@keyframes boldPulse{
+  0%,100%{text-shadow:0 0 22px rgba(20,184,166,0.45),0 0 55px rgba(20,184,166,0.15)}
+  50%{text-shadow:0 0 35px rgba(20,184,166,0.75),0 0 80px rgba(20,184,166,0.35),0 0 130px rgba(129,140,248,0.18)}
+}
+body.theme-bold h1.hero-name .hl{animation:boldPulse 3.2s ease-in-out infinite}
+
+/* Ghost section watermarks */
+.sec-ghost{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:clamp(10rem,20vw,18rem);color:rgba(20,184,166,0.03);top:50%;right:-3%;transform:translateY(-50%);white-space:nowrap;pointer-events:none;letter-spacing:0.05em;line-height:1;z-index:0;user-select:none}
+
+/* ── Parallax first-name behind hero ── */
+.hero-parallax-name{
+  position:absolute;font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(14rem,28vw,26rem);
+  color:rgba(20,184,166,0.045);
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  white-space:nowrap;pointer-events:none;
+  letter-spacing:0.12em;user-select:none;
+  will-change:transform;line-height:1;z-index:0;
+}
+
+/* ── 3D Floating element containers ── */
+.bold-floats{position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.bold-scene{position:absolute;perspective:600px}
+.bold-scene-1{top:12%;right:8%}
+.bold-scene-2{bottom:22%;right:20%}
+.bold-scene-3{top:58%;left:5%}
+
+/* 3D Rotating Cube (large) */
+.bold-3d-cube{
+  width:60px;height:60px;
+  transform-style:preserve-3d;
+  animation:boldCubeRotate 22s linear infinite;
+}
+@keyframes boldCubeRotate{
+  0%{transform:rotateX(0deg) rotateY(0deg) rotateZ(0deg)}
+  100%{transform:rotateX(360deg) rotateY(540deg) rotateZ(180deg)}
+}
+.cube-face{
+  position:absolute;width:60px;height:60px;
+  border:1.5px solid rgba(20,184,166,0.42);
+  background:rgba(20,184,166,0.04);
+  backdrop-filter:blur(1px);
+}
+.cube-face.front {transform:translateZ(30px)}
+.cube-face.back  {transform:rotateY(180deg) translateZ(30px)}
+.cube-face.left  {transform:rotateY(-90deg) translateZ(30px)}
+.cube-face.right {transform:rotateY(90deg) translateZ(30px)}
+.cube-face.top   {transform:rotateX(90deg) translateZ(30px)}
+.cube-face.bottom{transform:rotateX(-90deg) translateZ(30px)}
+
+/* 3D Rotating Cube (small, gold) */
+.bold-cube-sm{
+  width:38px;height:38px;
+  transform-style:preserve-3d;
+  animation:boldCubeRotate 32s linear infinite reverse;
+}
+.bold-cube-sm .cube-face{
+  width:38px;height:38px;
+  border-color:rgba(129,140,248,0.38);
+  background:rgba(129,140,248,0.04);
+}
+.bold-cube-sm .cube-face.front {transform:translateZ(19px)}
+.bold-cube-sm .cube-face.back  {transform:rotateY(180deg) translateZ(19px)}
+.bold-cube-sm .cube-face.left  {transform:rotateY(-90deg) translateZ(19px)}
+.bold-cube-sm .cube-face.right {transform:rotateY(90deg) translateZ(19px)}
+.bold-cube-sm .cube-face.top   {transform:rotateX(90deg) translateZ(19px)}
+.bold-cube-sm .cube-face.bottom{transform:rotateX(-90deg) translateZ(19px)}
+
+/* Floating 3D Ring */
+.bold-ring{
+  width:76px;height:76px;border-radius:50%;
+  border:2px solid rgba(129,140,248,0.45);
+  box-shadow:0 0 22px rgba(129,140,248,0.18),inset 0 0 18px rgba(129,140,248,0.06);
+  animation:boldRingFloat 17s ease-in-out infinite;
+}
+@keyframes boldRingFloat{
+  0%  {transform:rotateX(62deg) rotateZ(0deg) translateY(0px)}
+  50% {transform:rotateX(62deg) rotateZ(180deg) translateY(-18px)}
+  100%{transform:rotateX(62deg) rotateZ(360deg) translateY(0px)}
+}
+
+/* Floating glow dots */
+.bold-float-dot{position:absolute;border-radius:50%;animation:boldDotFloat ease-in-out infinite}
+.bold-dot-1{width:10px;height:10px;background:rgba(20,184,166,0.7);top:26%;left:8%;animation-duration:7.5s;box-shadow:0 0 18px rgba(20,184,166,0.9)}
+.bold-dot-2{width:7px;height:7px;background:rgba(129,140,248,0.75);top:68%;right:11%;animation-duration:9.5s;animation-delay:-3.5s;box-shadow:0 0 14px rgba(129,140,248,1)}
+.bold-dot-3{width:9px;height:9px;background:rgba(20,184,166,0.55);bottom:28%;left:20%;animation-duration:11s;animation-delay:-6s;box-shadow:0 0 16px rgba(20,184,166,0.75)}
+@keyframes boldDotFloat{
+  0%,100%{transform:translateY(0) scale(1)}
+  50%{transform:translateY(-28px) scale(1.18)}
+}
+
+/* Left accent bar on skill cards */
+body.theme-bold .skill-card{border-left:3px solid rgba(20,184,166,0.45)}
+body.theme-bold .skill-card:hover{border-left-color:#14b8a6}
+
+/* ══ END BOLD OVERRIDES ═══════════════════════════════════════════════ */
+</style>
+</head>
+<body>
+
+<nav id="top">
+  <div class="nav-logo" onclick="document.getElementById('top').scrollIntoView({behavior:'smooth'})">SO</div>
+  <ul><li><a href="#about">About</a></li><li><a href="#tools">Tools</a></li><li><a href="#certs">Certs</a></li><li><a href="#reviews">Reviews</a></li><li><a href="#contact">Contact</a></li></ul>
+</nav><section class="hero" id="about">
+  <canvas id="hero-canvas" class="hero-canvas"></canvas>
+  <div class="hero-content">
+    <p class="eyebrow ha1">Administrative Virtual Assistant</p>
+    <h1 class="hero-name ha2">Sadhan<br><span class="hl">Omar</span></h1>
+    <div class="role-tag ha3">Logistics &amp; Operations Support Virtual Assistant | CRM &amp; Lead Management | SAP Data Systems | Executive &amp; eCommerce Support</div>
+    <p class="hero-bio-text ha4">Detail-oriented logistics, operations, and administrative support professional with experience in SAP data management, workflow coordination, reporting, CRM support, and business operations. Skilled in maintaining accurate records, supporting logistics-related workflows, handling operational data, and ensuring smooth day-to-day business processes in fast-paced environments.
+Experienced in CRM organization, lead tracking, executive support, and eCommerce assistance while maintaining structured systems and operational efficiency. Proficient in productivity, communication, and remote collaboration tools with a strong focus on accuracy, organization, and dependable support
+</p>
+    <div class="hero-contacts ha5"><a href="mailto:sdomar102001@gmail.com"    class="contact-item">✉ sdomar102001@gmail.com</a><span class="contact-item">📞 +639770449547</span><span class="contact-item">📍 Philippines </span><a href="www.linkedin.com/in/sadhan-omar-b422b1380" target="_blank" class="contact-item">💼 LinkedIn</a></div>
+    <div class="s-tags ha6"><span class="s-tag">Logistics Operations Support</span><span class="s-tag">CRM &amp; Lead Management</span><span class="s-tag">SAP Data Management</span><span class="s-tag">Executive &amp; Administrative Support</span><span class="s-tag">eCommerce Support</span><span class="s-tag">Workflow &amp; Data Coordination</span></div>
+  </div>
+  <div class="hero-visual hv">
+    <div class="photo-wrap">
+      <img src="data:image/jpeg;base64,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" alt="Sadhan Omar" class="hero-photo">
+      <div class="neon-bar"></div>
+    </div>
+  </div>
+</section><div class="stats">
+  <div>
+    <span class="stat-num counter" data-target="3" data-suffix="+" data-prefix="">0+</span>
+    <span class="stat-label">Years Experience</span>
+  </div><div>
+    <span class="stat-num counter" data-target="50" data-suffix="+" data-prefix="">0+</span>
+    <span class="stat-label">Clients Served</span>
+  </div><div>
+    <span class="stat-num counter" data-target="24" data-suffix="+" data-prefix="">0+</span>
+    <span class="stat-label">Tools Mastered</span>
+  </div><div>
+    <span class="stat-num counter" data-target="100" data-suffix="%" data-prefix="">0%</span>
+    <span class="stat-label">Client Satisfaction</span>
+  </div>
+</div><section class="sec alt" style="position:relative;overflow:hidden">
+  
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-ey">What I Do Best</p>
+      <h2 class="sec-title">CORE STRENGTHS</h2>
+      <p class="sec-desc">The key competencies that make me an indispensable asset to your business.</p>
+    </div>
+    <div class="skills-grid"><div class="skill-card">
+  <span class="skill-num">01</span>
+  <span class="skill-icon">🗂️</span>
+  <div class="skill-title">Organisation & Admin</div>
+  <ul class="skill-list"><li>Logistics Operations Support</li><li>CRM &amp; Lead Management</li></ul>
+</div><div class="skill-card">
+  <span class="skill-num">02</span>
+  <span class="skill-icon">📅</span>
+  <div class="skill-title">Workflow & Systems</div>
+  <ul class="skill-list"><li>SAP Data Management</li><li>Executive &amp; Administrative Support</li></ul>
+</div><div class="skill-card">
+  <span class="skill-num">03</span>
+  <span class="skill-icon">💬</span>
+  <div class="skill-title">Communication</div>
+  <ul class="skill-list"><li>eCommerce Support</li><li>Workflow &amp; Data Coordination</li></ul>
+</div></div>
+  </div>
+</section><section class="sec" id="tools" style="position:relative;overflow:hidden">
+  
+  <div class="wrap">
+    <div class="sec-head" style="text-align:center">
+      <p class="sec-ey" style="justify-content:center">My Arsenal</p>
+      <h2 class="sec-title">TOOLS I MASTER</h2>
+      <p class="sec-desc" style="margin:0 auto">The industry-standard platforms I work with daily to keep your business running like clockwork.</p>
+    </div>
+  </div>
+  <div class="marquee-wrap" style="margin-top:48px">
+    <div class="marquee-row mq-left"><span class="tool-chip"><span class="chip-icon" style="background:#EA4335"><img src="https://cdn.simpleicons.org/gmail/ffffff" alt="Gmail" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Gmail</span><span class="tool-chip"><span class="chip-icon" style="background:#2D8CFF"><img src="https://cdn.simpleicons.org/zoom/ffffff" alt="Zoom" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Zoom</span><span class="tool-chip"><span class="chip-icon" style="background:#15C39A"><img src="https://cdn.simpleicons.org/grammarly/ffffff" alt="Grammarly" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Grammarly</span><span class="tool-chip"><span class="chip-icon" style="background:#4A154B"><img src="https://cdn.simpleicons.org/slack/ffffff" alt="Slack" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Slack</span><span class="tool-chip"><span class="chip-icon" style="background:#0078D4"><img src="https://cdn.simpleicons.org/microsoftoutlook/ffffff" alt="Microsoft Outlook" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Microsoft Outlook</span><span class="tool-chip"><span class="chip-icon" style="background:#4285F4"><img src="https://cdn.simpleicons.org/googledrive/ffffff" alt="Google Drive" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Google Drive</span><span class="tool-chip"><span class="chip-icon" style="background:#1A73E8"><img src="https://cdn.simpleicons.org/googlecalendar/ffffff" alt="Google Calendar" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Google Calendar</span><span class="tool-chip"><span class="chip-icon" style="background:#0F9D58"><img src="https://cdn.simpleicons.org/googlesheets/ffffff" alt="Google Sheets" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Google Sheets</span><span class="tool-chip"><span class="chip-icon" style="background:#4285F4"><img src="https://cdn.simpleicons.org/googledocs/ffffff" alt="Google Docs" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Google Docs</span><span class="tool-chip"><span class="chip-icon" style="background:#4285F4"><img src="https://cdn.simpleicons.org/googleworkspace/ffffff" alt="Google Workspace" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Google Workspace</span><span class="tool-chip"><span class="chip-icon" style="background:#2B579A"><img src="https://cdn.simpleicons.org/microsoftword/ffffff" alt="Microsoft Word" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Microsoft Word</span><span class="tool-chip"><span class="chip-icon" style="background:#D83B01"><img src="https://cdn.simpleicons.org/microsoftoffice365/ffffff" alt="Microsoft Office" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Microsoft Office</span><span class="tool-chip"><span class="chip-icon" style="background:#EA4335"><img src="https://cdn.simpleicons.org/gmail/ffffff" alt="Gmail" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Gmail</span><span class="tool-chip"><span class="chip-icon" style="background:#2D8CFF"><img src="https://cdn.simpleicons.org/zoom/ffffff" alt="Zoom" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Zoom</span><span class="tool-chip"><span class="chip-icon" style="background:#15C39A"><img src="https://cdn.simpleicons.org/grammarly/ffffff" alt="Grammarly" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Grammarly</span><span class="tool-chip"><span class="chip-icon" style="background:#4A154B"><img src="https://cdn.simpleicons.org/slack/ffffff" alt="Slack" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Slack</span><span class="tool-chip"><span class="chip-icon" style="background:#0078D4"><img src="https://cdn.simpleicons.org/microsoftoutlook/ffffff" alt="Microsoft Outlook" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Microsoft Outlook</span><span class="tool-chip"><span class="chip-icon" style="background:#4285F4"><img src="https://cdn.simpleicons.org/googledrive/ffffff" alt="Google Drive" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Google Drive</span><span class="tool-chip"><span class="chip-icon" style="background:#1A73E8"><img src="https://cdn.simpleicons.org/googlecalendar/ffffff" alt="Google Calendar" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Google Calendar</span><span class="tool-chip"><span class="chip-icon" style="background:#0F9D58"><img src="https://cdn.simpleicons.org/googlesheets/ffffff" alt="Google Sheets" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Google Sheets</span><span class="tool-chip"><span class="chip-icon" style="background:#4285F4"><img src="https://cdn.simpleicons.org/googledocs/ffffff" alt="Google Docs" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Google Docs</span><span class="tool-chip"><span class="chip-icon" style="background:#4285F4"><img src="https://cdn.simpleicons.org/googleworkspace/ffffff" alt="Google Workspace" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Google Workspace</span><span class="tool-chip"><span class="chip-icon" style="background:#2B579A"><img src="https://cdn.simpleicons.org/microsoftword/ffffff" alt="Microsoft Word" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Microsoft Word</span><span class="tool-chip"><span class="chip-icon" style="background:#D83B01"><img src="https://cdn.simpleicons.org/microsoftoffice365/ffffff" alt="Microsoft Office" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Microsoft Office</span><span class="tool-chip"><span class="chip-icon" style="background:#EA4335"><img src="https://cdn.simpleicons.org/gmail/ffffff" alt="Gmail" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Gmail</span><span class="tool-chip"><span class="chip-icon" style="background:#2D8CFF"><img src="https://cdn.simpleicons.org/zoom/ffffff" alt="Zoom" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Zoom</span><span class="tool-chip"><span class="chip-icon" style="background:#15C39A"><img src="https://cdn.simpleicons.org/grammarly/ffffff" alt="Grammarly" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Grammarly</span><span class="tool-chip"><span class="chip-icon" style="background:#4A154B"><img src="https://cdn.simpleicons.org/slack/ffffff" alt="Slack" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Slack</span><span class="tool-chip"><span class="chip-icon" style="background:#0078D4"><img src="https://cdn.simpleicons.org/microsoftoutlook/ffffff" alt="Microsoft Outlook" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Microsoft Outlook</span><span class="tool-chip"><span class="chip-icon" style="background:#4285F4"><img src="https://cdn.simpleicons.org/googledrive/ffffff" alt="Google Drive" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Google Drive</span><span class="tool-chip"><span class="chip-icon" style="background:#1A73E8"><img src="https://cdn.simpleicons.org/googlecalendar/ffffff" alt="Google Calendar" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Google Calendar</span><span class="tool-chip"><span class="chip-icon" style="background:#0F9D58"><img src="https://cdn.simpleicons.org/googlesheets/ffffff" alt="Google Sheets" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Google Sheets</span><span class="tool-chip"><span class="chip-icon" style="background:#4285F4"><img src="https://cdn.simpleicons.org/googledocs/ffffff" alt="Google Docs" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Google Docs</span><span class="tool-chip"><span class="chip-icon" style="background:#4285F4"><img src="https://cdn.simpleicons.org/googleworkspace/ffffff" alt="Google Workspace" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Google Workspace</span><span class="tool-chip"><span class="chip-icon" style="background:#2B579A"><img src="https://cdn.simpleicons.org/microsoftword/ffffff" alt="Microsoft Word" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Microsoft Word</span><span class="tool-chip"><span class="chip-icon" style="background:#D83B01"><img src="https://cdn.simpleicons.org/microsoftoffice365/ffffff" alt="Microsoft Office" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Microsoft Office</span><span class="tool-chip"><span class="chip-icon" style="background:#EA4335"><img src="https://cdn.simpleicons.org/gmail/ffffff" alt="Gmail" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Gmail</span><span class="tool-chip"><span class="chip-icon" style="background:#2D8CFF"><img src="https://cdn.simpleicons.org/zoom/ffffff" alt="Zoom" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Zoom</span><span class="tool-chip"><span class="chip-icon" style="background:#15C39A"><img src="https://cdn.simpleicons.org/grammarly/ffffff" alt="Grammarly" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Grammarly</span><span class="tool-chip"><span class="chip-icon" style="background:#4A154B"><img src="https://cdn.simpleicons.org/slack/ffffff" alt="Slack" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Slack</span><span class="tool-chip"><span class="chip-icon" style="background:#0078D4"><img src="https://cdn.simpleicons.org/microsoftoutlook/ffffff" alt="Microsoft Outlook" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Microsoft Outlook</span><span class="tool-chip"><span class="chip-icon" style="background:#4285F4"><img src="https://cdn.simpleicons.org/googledrive/ffffff" alt="Google Drive" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Google Drive</span><span class="tool-chip"><span class="chip-icon" style="background:#1A73E8"><img src="https://cdn.simpleicons.org/googlecalendar/ffffff" alt="Google Calendar" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Google Calendar</span><span class="tool-chip"><span class="chip-icon" style="background:#0F9D58"><img src="https://cdn.simpleicons.org/googlesheets/ffffff" alt="Google Sheets" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Google Sheets</span><span class="tool-chip"><span class="chip-icon" style="background:#4285F4"><img src="https://cdn.simpleicons.org/googledocs/ffffff" alt="Google Docs" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Google Docs</span><span class="tool-chip"><span class="chip-icon" style="background:#4285F4"><img src="https://cdn.simpleicons.org/googleworkspace/ffffff" alt="Google Workspace" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Google Workspace</span><span class="tool-chip"><span class="chip-icon" style="background:#2B579A"><img src="https://cdn.simpleicons.org/microsoftword/ffffff" alt="Microsoft Word" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Microsoft Word</span><span class="tool-chip"><span class="chip-icon" style="background:#D83B01"><img src="https://cdn.simpleicons.org/microsoftoffice365/ffffff" alt="Microsoft Office" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Microsoft Office</span></div>
+    <div class="marquee-row mq-right"><span class="tool-chip"><span class="chip-icon" style="background:#217346"><img src="https://cdn.simpleicons.org/microsoftexcel/ffffff" alt="Microsoft Excel" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Microsoft Excel</span><span class="tool-chip"><span class="chip-icon" style="background:#7B68EE"><img src="https://cdn.simpleicons.org/clickup/ffffff" alt="ClickUp" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>ClickUp</span><span class="tool-chip"><span class="chip-icon" style="background:#000000"><img src="https://cdn.simpleicons.org/notion/ffffff" alt="Notion" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Notion</span><span class="tool-chip"><span class="chip-icon" style="background:#0052CC"><img src="https://cdn.simpleicons.org/trello/ffffff" alt="Trello" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Trello</span><span class="tool-chip"><span class="chip-icon" style="background:#FF7A59"><img src="https://cdn.simpleicons.org/hubspot/ffffff" alt="HubSpot" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>HubSpot</span><span class="tool-chip"><span class="chip-icon" style="background:#FFE01B"><img src="https://cdn.simpleicons.org/mailchimp/ffffff" alt="Mailchimp" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Mailchimp</span><span class="tool-chip"><span class="chip-icon" style="background:#FF4A00"><img src="https://cdn.simpleicons.org/zapier/ffffff" alt="Zapier" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Zapier</span><span class="tool-chip"><span class="chip-icon" style="background:#006BFF"><img src="https://cdn.simpleicons.org/calendly/ffffff" alt="Calendly" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Calendly</span><span class="tool-chip"><span class="chip-icon" style="background:#2CA01C"><img src="https://cdn.simpleicons.org/quickbooks/ffffff" alt="QuickBooks" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>QuickBooks</span><span class="tool-chip"><span class="chip-icon" style="background:#03363D"><img src="https://cdn.simpleicons.org/zendesk/ffffff" alt="Zendesk" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Zendesk</span><span class="tool-chip"><span class="chip-icon" style="background:#412991"><img src="https://cdn.simpleicons.org/openai/ffffff" alt="ChatGPT / AI Tools" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>ChatGPT / AI Tools</span><span class="tool-chip"><span class="chip-icon" style="background:#8E75B2"><img src="https://cdn.simpleicons.org/googlegemini/ffffff" alt="Gemini AI" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Gemini AI</span><span class="tool-chip"><span class="chip-icon" style="background:#217346"><img src="https://cdn.simpleicons.org/microsoftexcel/ffffff" alt="Microsoft Excel" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Microsoft Excel</span><span class="tool-chip"><span class="chip-icon" style="background:#7B68EE"><img src="https://cdn.simpleicons.org/clickup/ffffff" alt="ClickUp" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>ClickUp</span><span class="tool-chip"><span class="chip-icon" style="background:#000000"><img src="https://cdn.simpleicons.org/notion/ffffff" alt="Notion" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Notion</span><span class="tool-chip"><span class="chip-icon" style="background:#0052CC"><img src="https://cdn.simpleicons.org/trello/ffffff" alt="Trello" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Trello</span><span class="tool-chip"><span class="chip-icon" style="background:#FF7A59"><img src="https://cdn.simpleicons.org/hubspot/ffffff" alt="HubSpot" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>HubSpot</span><span class="tool-chip"><span class="chip-icon" style="background:#FFE01B"><img src="https://cdn.simpleicons.org/mailchimp/ffffff" alt="Mailchimp" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Mailchimp</span><span class="tool-chip"><span class="chip-icon" style="background:#FF4A00"><img src="https://cdn.simpleicons.org/zapier/ffffff" alt="Zapier" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Zapier</span><span class="tool-chip"><span class="chip-icon" style="background:#006BFF"><img src="https://cdn.simpleicons.org/calendly/ffffff" alt="Calendly" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Calendly</span><span class="tool-chip"><span class="chip-icon" style="background:#2CA01C"><img src="https://cdn.simpleicons.org/quickbooks/ffffff" alt="QuickBooks" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>QuickBooks</span><span class="tool-chip"><span class="chip-icon" style="background:#03363D"><img src="https://cdn.simpleicons.org/zendesk/ffffff" alt="Zendesk" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Zendesk</span><span class="tool-chip"><span class="chip-icon" style="background:#412991"><img src="https://cdn.simpleicons.org/openai/ffffff" alt="ChatGPT / AI Tools" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>ChatGPT / AI Tools</span><span class="tool-chip"><span class="chip-icon" style="background:#8E75B2"><img src="https://cdn.simpleicons.org/googlegemini/ffffff" alt="Gemini AI" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Gemini AI</span><span class="tool-chip"><span class="chip-icon" style="background:#217346"><img src="https://cdn.simpleicons.org/microsoftexcel/ffffff" alt="Microsoft Excel" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Microsoft Excel</span><span class="tool-chip"><span class="chip-icon" style="background:#7B68EE"><img src="https://cdn.simpleicons.org/clickup/ffffff" alt="ClickUp" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>ClickUp</span><span class="tool-chip"><span class="chip-icon" style="background:#000000"><img src="https://cdn.simpleicons.org/notion/ffffff" alt="Notion" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Notion</span><span class="tool-chip"><span class="chip-icon" style="background:#0052CC"><img src="https://cdn.simpleicons.org/trello/ffffff" alt="Trello" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Trello</span><span class="tool-chip"><span class="chip-icon" style="background:#FF7A59"><img src="https://cdn.simpleicons.org/hubspot/ffffff" alt="HubSpot" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>HubSpot</span><span class="tool-chip"><span class="chip-icon" style="background:#FFE01B"><img src="https://cdn.simpleicons.org/mailchimp/ffffff" alt="Mailchimp" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Mailchimp</span><span class="tool-chip"><span class="chip-icon" style="background:#FF4A00"><img src="https://cdn.simpleicons.org/zapier/ffffff" alt="Zapier" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Zapier</span><span class="tool-chip"><span class="chip-icon" style="background:#006BFF"><img src="https://cdn.simpleicons.org/calendly/ffffff" alt="Calendly" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Calendly</span><span class="tool-chip"><span class="chip-icon" style="background:#2CA01C"><img src="https://cdn.simpleicons.org/quickbooks/ffffff" alt="QuickBooks" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>QuickBooks</span><span class="tool-chip"><span class="chip-icon" style="background:#03363D"><img src="https://cdn.simpleicons.org/zendesk/ffffff" alt="Zendesk" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Zendesk</span><span class="tool-chip"><span class="chip-icon" style="background:#412991"><img src="https://cdn.simpleicons.org/openai/ffffff" alt="ChatGPT / AI Tools" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>ChatGPT / AI Tools</span><span class="tool-chip"><span class="chip-icon" style="background:#8E75B2"><img src="https://cdn.simpleicons.org/googlegemini/ffffff" alt="Gemini AI" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Gemini AI</span><span class="tool-chip"><span class="chip-icon" style="background:#217346"><img src="https://cdn.simpleicons.org/microsoftexcel/ffffff" alt="Microsoft Excel" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Microsoft Excel</span><span class="tool-chip"><span class="chip-icon" style="background:#7B68EE"><img src="https://cdn.simpleicons.org/clickup/ffffff" alt="ClickUp" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>ClickUp</span><span class="tool-chip"><span class="chip-icon" style="background:#000000"><img src="https://cdn.simpleicons.org/notion/ffffff" alt="Notion" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Notion</span><span class="tool-chip"><span class="chip-icon" style="background:#0052CC"><img src="https://cdn.simpleicons.org/trello/ffffff" alt="Trello" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Trello</span><span class="tool-chip"><span class="chip-icon" style="background:#FF7A59"><img src="https://cdn.simpleicons.org/hubspot/ffffff" alt="HubSpot" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>HubSpot</span><span class="tool-chip"><span class="chip-icon" style="background:#FFE01B"><img src="https://cdn.simpleicons.org/mailchimp/ffffff" alt="Mailchimp" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Mailchimp</span><span class="tool-chip"><span class="chip-icon" style="background:#FF4A00"><img src="https://cdn.simpleicons.org/zapier/ffffff" alt="Zapier" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Zapier</span><span class="tool-chip"><span class="chip-icon" style="background:#006BFF"><img src="https://cdn.simpleicons.org/calendly/ffffff" alt="Calendly" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Calendly</span><span class="tool-chip"><span class="chip-icon" style="background:#2CA01C"><img src="https://cdn.simpleicons.org/quickbooks/ffffff" alt="QuickBooks" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>QuickBooks</span><span class="tool-chip"><span class="chip-icon" style="background:#03363D"><img src="https://cdn.simpleicons.org/zendesk/ffffff" alt="Zendesk" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Zendesk</span><span class="tool-chip"><span class="chip-icon" style="background:#412991"><img src="https://cdn.simpleicons.org/openai/ffffff" alt="ChatGPT / AI Tools" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>ChatGPT / AI Tools</span><span class="tool-chip"><span class="chip-icon" style="background:#8E75B2"><img src="https://cdn.simpleicons.org/googlegemini/ffffff" alt="Gemini AI" crossorigin="anonymous" onerror="this.parentNode.style.display='none'"></span>Gemini AI</span></div>
+  </div>
+</section><section class="sec alt" id="certs" style="position:relative;overflow:hidden">
+  
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-ey">Credentials</p>
+      <h2 class="sec-title">CERTIFICATIONS</h2>
+      <p class="sec-desc">Professional credentials that validate my expertise and commitment to continuous growth.</p>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-card">
+  <div class="cert-ph"><span>🏆</span><p>Certificate 1</p></div>
+  <div class="cert-body">
+    <p class="cert-name">Certificate 1</p>
+    <p class="cert-issuer">Issuing Organization</p>
+  </div>
+</div><div class="cert-card">
+  <div class="cert-ph"><span>🏆</span><p>Certificate 2</p></div>
+  <div class="cert-body">
+    <p class="cert-name">Certificate 2</p>
+    <p class="cert-issuer">Issuing Organization</p>
+  </div>
+</div>
+    </div>
+  </div>
+</section><section class="sec" id="reviews" style="position:relative;overflow:hidden">
+  
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-ey">Social Proof</p>
+      <h2 class="sec-title">CLIENT REVIEWS</h2>
+      <p class="sec-desc">Real words from real businesses I've had the pleasure of working with.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+  <div class="testi-qm">"</div>
+  <p class="testi-text">Sadhan completely transformed how our business runs. Managing my inbox, calendar, and client follow-ups — I got back 15 hours every single week.</p>
+  <div class="testi-author">
+    <div class="testi-av">SM</div>
+    <div><p class="testi-name">Sarah Mitchell</p><p class="testi-role">CEO, BrightPath Consulting</p></div>
+  </div>
+</div><div class="testi-card">
+  <div class="testi-qm">"</div>
+  <p class="testi-text">Incredibly organised and always one step ahead. Sadhan handles everything before I even think to ask. Best investment I've ever made for my business.</p>
+  <div class="testi-author">
+    <div class="testi-av">MT</div>
+    <div><p class="testi-name">Mark Thompson</p><p class="testi-role">Owner, Thompson Legal Services</p></div>
+  </div>
+</div><div class="testi-card">
+  <div class="testi-qm">"</div>
+  <p class="testi-text">Our CRM and client communications are flawless since Sadhan joined. Reliable, professional, and delivers every single time.</p>
+  <div class="testi-author">
+    <div class="testi-av">ER</div>
+    <div><p class="testi-name">Emily Rodriguez</p><p class="testi-role">Director, TechForward Agency</p></div>
+  </div>
+</div><div class="testi-card">
+  <div class="testi-qm">"</div>
+  <p class="testi-text">I can finally focus on growing my coaching practice instead of drowning in admin work. Sadhan is a genuine game-changer for any entrepreneur.</p>
+  <div class="testi-author">
+    <div class="testi-av">DC</div>
+    <div><p class="testi-name">David Chen</p><p class="testi-role">Business Growth Coach</p></div>
+  </div>
+</div>
+    </div>
+  </div>
+</section><section class="cta" id="contact">
+  <div class="cta-ghost">SADHAN</div>
+  <div class="cta-inner">
+    <p class="sec-ey" style="justify-content:center;margin-bottom:20px">
+      <span>Let's Work Together</span>
+    </p>
+    <h2 class="cta-title">READY TO <span class="hl">LEVEL UP?</span></h2>
+    <p class="cta-sub">Let's build something exceptional together. I'm available for new projects and long-term partnerships — drop me a message and let's get started.</p>
+    <div class="contact-links"><a href="mailto:sdomar102001@gmail.com"    class="cl-item"><span class="cl-icon">✉</span>sdomar102001@gmail.com</a><span class="cl-item"><span class="cl-icon">📞</span>+639770449547</span><a href="www.linkedin.com/in/sadhan-omar-b422b1380" target="_blank" class="cl-item"><span class="cl-icon">💼</span>LinkedIn</a></div>
+  </div>
+</section>
+<footer class="footer">
+  <div class="footer-name">SADHAN OMAR</div>
+  <p>© 2026 Sadhan Omar &nbsp;·&nbsp; Built with <strong>Rene AI</strong></p>
+</footer>
+<script>
+(function(){
+  
+  // ── Particle canvas ──
+  var canvas=document.getElementById('hero-canvas');
+  if(canvas){
+    var ctx=canvas.getContext('2d');
+    var W=canvas.offsetWidth,H=canvas.offsetHeight;
+    canvas.width=W;canvas.height=H;
+    window.addEventListener('resize',function(){W=canvas.offsetWidth;H=canvas.offsetHeight;canvas.width=W;canvas.height=H;});
+    var N=55,pts=[];
+    for(var i=0;i<N;i++){
+      pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*0.28,vy:-(Math.random()*0.45+0.15),r:Math.random()*1.6+0.4,life:Math.random()});
+    }
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      for(var i=0;i<pts.length;i++){
+        var p=pts[i];
+        p.x+=p.vx;p.y+=p.vy;p.life+=0.0015;
+        if(p.y<-4||p.life>1){p.x=Math.random()*W;p.y=H+4;p.life=0;}
+        var op=Math.sin(p.life*Math.PI)*0.55;
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle='rgba(20,184,166,'+op+')';
+        ctx.fill();
+      }
+      for(var i=0;i<pts.length;i++){
+        for(var j=i+1;j<pts.length;j++){
+          var dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y;
+          var dist=Math.sqrt(dx*dx+dy*dy);
+          if(dist<90){
+            ctx.beginPath();
+            ctx.moveTo(pts[i].x,pts[i].y);
+            ctx.lineTo(pts[j].x,pts[j].y);
+            ctx.strokeStyle='rgba(20,184,166,'+(0.08*(1-dist/90))+')';
+            ctx.lineWidth=0.6;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  }
+
+  
+
+  // ── Counter animation (triggers on load) ──
+  setTimeout(function(){
+    document.querySelectorAll('.counter').forEach(function(el){
+      var target=parseFloat(el.getAttribute('data-target')||'0');
+      var suffix=el.getAttribute('data-suffix')||'';
+      var prefix=el.getAttribute('data-prefix')||'';
+      var isDecimal=String(target).indexOf('.')!==-1;
+      var dur=1800,start=performance.now();
+      function tick(now){
+        var p=Math.min((now-start)/dur,1);
+        var ease=1-Math.pow(1-p,3);
+        var val=target*ease;
+        el.textContent=prefix+(isDecimal?val.toFixed(1):Math.floor(val))+suffix;
+        if(p<1)requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  },600);
+
+  // ── Smooth scroll ──
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      var tgt=document.querySelector(a.getAttribute('href'));
+      if(tgt)tgt.scrollIntoView({behavior:'smooth'});
+    });
+  });
+})();
+</script>
+</body>
+</html>
