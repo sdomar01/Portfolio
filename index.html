@@ -106,7 +106,58 @@ h1.hero-name .hl{color:#14b8a6;text-shadow:0 0 22px rgba(20,184,166,0.45),0 0 55
 .skill-list li{font-size:0.86rem;color:#6b94b8;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px}
 .skill-list li::before{content:'→';color:#14b8a6;font-size:0.8rem;flex-shrink:0}
 .skill-list li:last-child{border-bottom:none}
+  
+.projects-section {
+  padding: 80px 40px;
+  color: #fff;
+}
 
+.section-title {
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+}
+
+/* PROJECT CARD STYLE (same vibe sa cards mo sa taas) */
+.project-box {
+  background: linear-gradient(145deg, #0a192f, #0f2a4a);
+  padding: 25px;
+  border-radius: 12px;
+  transition: 0.3s;
+  position: relative;
+  border: 1px solid rgba(0,255,255,0.1);
+}
+
+.project-box:hover {
+  transform: translateY(-10px);
+  border: 1px solid rgba(0,255,255,0.4);
+  box-shadow: 0 0 20px rgba(0,255,255,0.2);
+}
+
+.project-box h3 {
+  margin-bottom: 5px;
+}
+
+.project-box .tag {
+  color: #00ffff;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.project-box ul {
+  padding-left: 18px;
+}
+
+.project-box li {
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #cbd5e1;
+}
 /* ── Tools — marquee ── */
 .marquee-wrap{position:relative;overflow:hidden;padding:12px 0}
 .marquee-wrap::before,.marquee-wrap::after{content:'';position:absolute;top:0;bottom:0;width:120px;z-index:2;pointer-events:none}
@@ -331,18 +382,16 @@ body.theme-bold .skill-card:hover{border-left-color:#14b8a6}
 
 <nav id="top">
   <div class="nav-logo" onclick="document.getElementById('top').scrollIntoView({behavior:'smooth'})">SO</div>
-  <ul><li><a href="#about">About</a></li><li><a href="#tools">Tools</a></li><li><a href="#certs">Certs</a></li><li><a href="#reviews">Reviews</a></li><li><a href="#contact">Contact</a></li></ul>
+  <ul><li><a href="#about">About</a></li><li><a href="#contact">Projects</a></li><li><a href="#tools">Tools</a></li><li><a href="#certs">Certs</a></li><li><a href="#reviews">Reviews</a></li><li><a href="#contact">Contact</a></li></ul>
 </nav><section class="hero" id="about">
   <canvas id="hero-canvas" class="hero-canvas"></canvas>
   <div class="hero-content">
     <p class="eyebrow ha1">Administrative Virtual Assistant</p>
     <h1 class="hero-name ha2">Sadhan<br><span class="hl">Omar</span></h1>
-    <div class="role-tag ha3">Logistics &amp; Operations Support Virtual Assistant | CRM &amp; Lead Management | SAP Data Systems | Executive &amp; eCommerce Support</div>
-    <p class="hero-bio-text ha4">Detail-oriented logistics, operations, and administrative support professional with experience in SAP data management, workflow coordination, reporting, CRM support, and business operations. Skilled in maintaining accurate records, supporting logistics-related workflows, handling operational data, and ensuring smooth day-to-day business processes in fast-paced environments.
-Experienced in CRM organization, lead tracking, executive support, and eCommerce assistance while maintaining structured systems and operational efficiency. Proficient in productivity, communication, and remote collaboration tools with a strong focus on accuracy, organization, and dependable support
-</p>
+    <div class="role-tag ha3">Logistics &amp; Operations VA | CRM &amp; Lead Automation | SAP + Zapier Workflows  </div>
+    <p class="hero-bio-text ha4">I help eCommerce and B2B teams automate lead capture, CRM, and data workflows so you can focus on growth, not admin work.</p>
     <div class="hero-contacts ha5"><a href="mailto:sdomar102001@gmail.com"    class="contact-item">✉ sdomar102001@gmail.com</a><span class="contact-item">📞 +639770449547</span><span class="contact-item">📍 Philippines </span><a href="www.linkedin.com/in/sadhan-omar-b422b1380" target="_blank" class="contact-item">💼 LinkedIn</a></div>
-    <div class="s-tags ha6"><span class="s-tag">Logistics Operations Support</span><span class="s-tag">CRM &amp; Lead Management</span><span class="s-tag">SAP Data Management</span><span class="s-tag">Executive &amp; Administrative Support</span><span class="s-tag">eCommerce Support</span><span class="s-tag">Workflow &amp; Data Coordination</span></div>
+    <div class="s-tags ha6"><span class="s-tag">Logistics &amp; Operations Support</span><span class="s-tag">CRM &amp; Lead Management</span><span class="s-tag">Workflow Automation (Zapier)</span><span class="s-tag">SAP Data Systems &amp; Reporting</span><span class="s-tag">Executive &amp; eCommerce Support</span><span class="s-tag">Remote Operations &amp; Admin Support</span></div>
   </div>
   <div class="hero-visual hv">
     <div class="photo-wrap">
@@ -376,18 +425,63 @@ Experienced in CRM organization, lead tracking, executive support, and eCommerce
   <span class="skill-num">01</span>
   <span class="skill-icon">🗂️</span>
   <div class="skill-title">Organisation & Admin</div>
-  <ul class="skill-list"><li>Logistics Operations Support</li><li>CRM &amp; Lead Management</li></ul>
+  <ul class="skill-list"><li>Logistics &amp; Operations Support</li><li>CRM &amp; Lead Management</li></ul>
 </div><div class="skill-card">
   <span class="skill-num">02</span>
   <span class="skill-icon">📅</span>
   <div class="skill-title">Workflow & Systems</div>
-  <ul class="skill-list"><li>SAP Data Management</li><li>Executive &amp; Administrative Support</li></ul>
+  <ul class="skill-list"><li>Workflow Automation (Zapier)</li><li>SAP Data Systems &amp; Reporting</li></ul>
 </div><div class="skill-card">
   <span class="skill-num">03</span>
   <span class="skill-icon">💬</span>
   <div class="skill-title">Communication</div>
-  <ul class="skill-list"><li>eCommerce Support</li><li>Workflow &amp; Data Coordination</li></ul>
+  <ul class="skill-list"><li>Executive &amp; eCommerce Support</li><li>Remote Operations &amp; Admin Support</li></ul>
 </div></div>
+    <div class="wrap"><br>
+  
+  <!-- HEADER -->
+  <div class="sec-head">
+    <p class="sec-ey">My Work</p>
+    <h2 class="sec-title">PROJECTS</h2>
+    <p class="sec-desc">
+      Real-world automation systems and CRM solutions designed to improve workflow efficiency and reduce manual work.
+    </p>
+  </div>
+
+  <!-- PROJECTS GRID -->
+  <div class="skills-grid">
+
+    <!-- Project 1 -->
+    <div class="skill-card">
+      <span class="skill-num">01</span>
+      <span class="skill-icon">⚙️</span>
+      <div class="skill-title">Automated Lead Capture & CRM System</div>
+      <ul class="skill-list">
+        <li>Captures leads from Google Forms</li>
+        <li>Instant Gmail follow-ups</li>
+        <li>Zapier integration (Forms, Sheets, Gmail)</li>
+        <li>Improved response time & reduced manual work</li>
+      </ul>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="skill-card">
+      <span class="skill-num">02</span>
+      <span class="skill-icon">📊</span>
+      <div class="skill-title">CRM & Lead Automation System</div>
+      <ul class="skill-list">
+        <li>CRM system using Google Sheets</li>
+        <li>Automated email follow-ups</li>
+        <li>Workflow logic (triggers & actions)</li>
+        <li>Reduced manual data entry</li>
+      </ul>
+    </div>
+
+  </div>
+
+</div>
+
+</section>
   </div>
 </section><section class="sec" id="tools" style="position:relative;overflow:hidden">
   
@@ -485,7 +579,7 @@ Experienced in CRM organization, lead tracking, executive support, and eCommerce
 </section>
 <footer class="footer">
   <div class="footer-name">SADHAN OMAR</div>
-  <p>© 2026 Sadhan Omar &nbsp;·&nbsp; Built with <strong>Rene AI</strong></p>
+  <p>© 2026 All rights reserved&nbsp;·&nbsp;</p>
 </footer>
 <script>
 (function(){
