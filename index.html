@@ -24,6 +24,48 @@ nav ul{list-style:none;display:flex;gap:36px}
 nav a{color:#6b94b8;font-size:0.76rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;transition:color 0.2s}
 nav a:hover{color:#14b8a6}
 
+  .contact-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.cl-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 12px;
+  background: #111;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.cl-item img {
+  width: 22px;
+  height: 22px;
+  transition: all 0.3s ease;
+}
+
+/* 🔥 HOVER EFFECT */
+.cl-item:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 0 15px rgba(255,255,255,0.2);
+}
+
+/* 🎨 BRAND COLORS ON HOVER */
+.cl-item:nth-child(1):hover { background: #EA4335; } /* Gmail */
+.cl-item:nth-child(2):hover { background: #25D366; } /* Phone */
+.cl-item:nth-child(3):hover { background: #0077B5; } /* LinkedIn */
+.cl-item:nth-child(4):hover { background: #333; }    /* GitHub */
+
+/* ✨ ICON GLOW */
+.cl-item:hover img {
+  filter: brightness(0) invert(1);
+  transform: scale(1.2);
+}
+
 /* ── Hero — split ── */
 .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:120px 60px 80px;gap:60px;position:relative;overflow:hidden;background:#060e1f}
 .hero-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
@@ -576,19 +618,19 @@ body.theme-bold .skill-card:hover{border-left-color:#14b8a6}
     <p class="cta-sub">Let's build something exceptional together. I'm available for new projects and long-term partnerships — drop me a message and let's get started.</p>
     <div class="contact-links">
   <a href="mailto:sdomar102001@gmail.com" class="cl-item" title="Email">
-    ✉
+    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/gmail.svg"/>
   </a>
 
-  <span class="cl-item">
+  <span class="cl-item" title="Phone">
     📞
   </span>
 
   <a href="https://www.linkedin.com/in/sadhan-omar-b422b1380" target="_blank" class="cl-item" title="LinkedIn">
-    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" width="20"/>
+    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg"/>
   </a>
 
   <a href="https://github.com/sdomar01" target="_blank" class="cl-item" title="GitHub">
-    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" width="20"/>
+    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg"/>
   </a>
 </div>
 </section>
