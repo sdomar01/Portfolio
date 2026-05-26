@@ -34,12 +34,13 @@ nav a:hover{color:#14b8a6}
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 45px;
-  height: 45px;
-  border-radius: 12px;
-  background: #111;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: #ffffff; /* 🔥 WHITE CARD */
   transition: all 0.3s ease;
   text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
 .cl-item img {
@@ -50,19 +51,29 @@ nav a:hover{color:#14b8a6}
 
 /* 🔥 HOVER EFFECT */
 .cl-item:hover {
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 0 15px rgba(255,255,255,0.2);
+  transform: translateY(-6px) scale(1.08);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
 }
 
-/* 🎨 BRAND COLORS ON HOVER */
-.cl-item:nth-child(1):hover { background: #EA4335; } /* Gmail */
-.cl-item:nth-child(2):hover { background: #25D366; } /* Phone */
-.cl-item:nth-child(3):hover { background: #0077B5; } /* LinkedIn */
-.cl-item:nth-child(4):hover { background: #333; }    /* GitHub */
+/* 🎨 BRAND COLORS (GLOW SA LABAS, DI BACKGROUND) */
+.cl-item:nth-child(1):hover {
+  box-shadow: 0 0 15px #EA4335;
+}
 
-/* ✨ ICON GLOW */
+.cl-item:nth-child(2):hover {
+  box-shadow: 0 0 15px #25D366;
+}
+
+.cl-item:nth-child(3):hover {
+  box-shadow: 0 0 15px #0077B5;
+}
+
+.cl-item:nth-child(4):hover {
+  box-shadow: 0 0 15px #333;
+}
+
+/* ✨ ICON POP */
 .cl-item:hover img {
-  filter: brightness(0) invert(1);
   transform: scale(1.2);
 }
 
