@@ -467,6 +467,13 @@ body.theme-bold .skill-card:hover{border-left-color:#14b8a6}
   .proj-modal-body{padding:26px 22px 32px}
   .proj-modal-body h3{font-size:1.6rem}
 }
+/* Centered hero fixes */
+.hero.hero-c .eyebrow{justify-content:center}
+.hero.hero-c .eyebrow::before{display:none}
+.hero.hero-c .s-tags{justify-content:center}
+.hero.hero-c .hero-content{display:flex;flex-direction:column;align-items:center;width:100%;max-width:900px}
+.hero.hero-c .hero-visual{width:100%;margin-top:20px}
+.hero.hero-c .neon-bar{display:none}
 </style>
 </head>
 <body>
@@ -922,6 +929,15 @@ document.addEventListener('keydown', function(e){
       m.classList.remove('active');
     });
     document.body.style.overflow = '';
+  }
+    // ── Center hero ──
+  var hero=document.querySelector('.hero');
+  if(hero){
+    hero.classList.add('hero-c');
+    var visual=document.querySelector('.hero-visual');
+    if(visual&&visual.parentElement!==hero){
+      hero.appendChild(visual);   // ilabas ang photo sa .hero-content
+    }
   }
 });
 </script>
