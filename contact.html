@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Contact | Sadhan Omar</title>
+<meta name="description" content="Sadhan Omar, virtual assistant for lead generation, CRM and GoHighLevel, cold outreach, and workflow automation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="head-inner">
+      <div class="head-row">
+        <a class="brand" href="index.html">SADHAN OMAR</a>
+        <div class="role">Virtual Assistant · Lead Generation</div>
+      </div>
+      <nav aria-label="Portfolio pages">
+        <a class="tab" href="index.html">Background</a>
+        <a class="tab" href="experience.html">Experience</a>
+        <a class="tab" href="projects.html">Projects</a>
+        <a class="tab" aria-current="page" href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="panel">
+      <div class="block">
+        <div class="eyebrow">Contact</div>
+        <h2 class="sec-title">Ready to level up?</h2>
+        <p class="bio" id="c-intro">I'm available for new projects and long-term partnerships. Write your message below, copy it, and send it to <b style="color:var(--fg);user-select:all">sdomar102001@gmail.com</b>. This page cannot send email by itself.</p>
+      </div>
+      <form id="cform" novalidate>
+        <label for="c-name">Name<input id="c-name" name="name" autocomplete="name" required></label>
+        <label for="c-email">Email<input id="c-email" name="email" type="email" autocomplete="email" required></label>
+        <label for="c-topic">Topic
+          <select id="c-topic" name="topic"><option>Lead generation</option><option>CRM or GoHighLevel setup</option><option>Workflow automation</option><option>Something else</option></select>
+        </label>
+        <label for="c-msg">Message<textarea id="c-msg" name="message" required></textarea></label>
+        <div class="err" id="c-err" role="alert"></div>
+        <label class="hp" aria-hidden="true">Leave this field empty<input name="website" tabindex="-1" autocomplete="off"></label>
+        <div class="ok" id="c-ok" role="status" hidden></div>
+        <button class="btn" type="submit" id="c-submit">Write message</button>
+      </form>
+      <div class="draft" id="draft" hidden>
+        <pre id="draft-text"></pre>
+        <div class="row"><button class="btn alt" type="button" id="copy">Copy message</button><span class="note" id="copy-note"></span></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>Sadhan Omar · Virtual Assistant · Lead Generation, CRM and Automation</footer>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
