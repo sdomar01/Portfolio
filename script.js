@@ -1,7 +1,22 @@
+// Theme toggle: light by default, remembers the choice on this device.
+(function () {
+  var root = document.documentElement;
+  var b = document.getElementById('theme');
+  if (!b) return;
+  function label() { b.setAttribute('aria-label', root.getAttribute('data-theme') === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'); }
+  label();
+  b.addEventListener('click', function () {
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+    label();
+  });
+})();
+
 // Contact form. Paste your Google Apps Script web app URL (it ends with /exec) between the quotes
 // to make the form send messages to your Google Sheet. While it is empty, the form only writes a
 // message the visitor can copy.
-var CONTACT_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyAs0Q1bMFcQb2LAQ0B2PGG372P0_VLvwIPJQCbFDsgTyScx-R6hteSZLwTBLAKq7gE/exec';
+var CONTACT_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzwN5YdqdbCmh-9oiG7C-EgYLI04cTSwo1Nys9irqzTTBq2WCsygggi_NXy6BdhTjEW/exec';
 var CONTACT_EMAIL = 'sdomar102001@gmail.com';
 
 (function () {
@@ -50,7 +65,8 @@ var CONTACT_EMAIL = 'sdomar102001@gmail.com';
           throw new Error('fail');
         }
       })
-      .catch(function () {
+      .catch(function (reason) {
+        console.error('Contact form:', reason);
         err.textContent = 'I could not confirm that your message was sent. Copy it below and email it to ' + CONTACT_EMAIL + '.';
         showDraft(d);
       })
@@ -130,11 +146,11 @@ var CONTACT_EMAIL = 'sdomar102001@gmail.com';
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce || !('IntersectionObserver' in window)) return;
 
-  var sel = '.eyebrow, .sec-title, .psec > h2, .psec > .intro, .subhead, .pcard, .card, .case, .entry, .cert, .shot, .stats, .kv > div, .meta > div, .chain li, .plat, .zap, .demo, .skills, .cta-row, .info section, .marquee-wrap, .draft, form, .block > h2, .block > .bio';
+  var sel = '.tile, .psec, .panel .block, .entry, .pcard, .case, .plat, .shot, .zap, .kv > div, .chain li';
   var seen = new Map();
   var targets = Array.prototype.slice.call(document.querySelectorAll(sel)).filter(function (el) {
-    if (el.closest('.plat-body') || el.closest('.lightbox') || el.closest('.hero') || el.closest('.phero') || el.closest('.stats')) return false;
-    if (el.closest('.panel > .block:first-child') && el.closest('.panel > .block:first-child') === el.parentNode) return false;
+    if (el.closest('.plat-body') || el.closest('.lightbox') || el.closest('.hero-t') || el.closest('.phero') || el.closest('.stats') || el.closest('.strip')) return false;
+    if (el.parentNode.closest && el.parentNode.closest('.reveal')) return false;
     if (el.offsetParent === null) return false;
     return el.getBoundingClientRect().top > window.innerHeight * 0.92;
   });
@@ -146,7 +162,7 @@ var CONTACT_EMAIL = 'sdomar102001@gmail.com';
       el.classList.add('in');
       setTimeout(function () { el.classList.remove('reveal', 'in'); el.style.removeProperty('--d'); }, 1400);
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+  }, { threshold: 0.01, rootMargin: '0px 0px -4% 0px' });
   targets.forEach(function (el) {
     var n = seen.get(el.parentNode) || 0;
     seen.set(el.parentNode, n + 1);
