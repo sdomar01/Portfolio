@@ -13,6 +13,45 @@
   });
 })();
 
+// Cursor spotlight on cards.
+(function () {
+  document.addEventListener('pointermove', function (e) {
+    var t = e.target.closest && e.target.closest('.bt');
+    if (!t) return;
+    var r = t.getBoundingClientRect();
+    t.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    t.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  }, { passive: true });
+})();
+
+// Glowing cursor (mouse devices only).
+(function () {
+  if (!window.matchMedia || !matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+  var root = document.documentElement;
+  var dot = document.createElement('div'); dot.className = 'cur-dot';
+  var glow = document.createElement('div'); glow.className = 'cur-glow';
+  document.body.appendChild(glow); document.body.appendChild(dot);
+  var x = -100, y = -100, gx = -100, gy = -100, raf = 0, shown = false;
+  function frame() {
+    gx += (x - gx) * 0.2; gy += (y - gy) * 0.2;
+    dot.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)';
+    glow.style.transform = 'translate3d(' + gx + 'px,' + gy + 'px,0)';
+    raf = (Math.abs(x - gx) > 0.1 || Math.abs(y - gy) > 0.1) ? requestAnimationFrame(frame) : 0;
+  }
+  document.addEventListener('pointermove', function (e) {
+    if (e.pointerType && e.pointerType !== 'mouse') return;
+    x = e.clientX; y = e.clientY;
+    if (!shown) { shown = true; gx = x; gy = y; root.classList.add('cursor-on'); document.body.classList.add('cur-on'); }
+    var t = e.target.closest ? e.target.closest('a,button,summary,label,.ibtn,.bt,.shot img,select') : null;
+    document.body.classList.toggle('cur-hover', !!t);
+    if (!raf) raf = requestAnimationFrame(frame);
+  }, { passive: true });
+  document.addEventListener('mousedown', function () { document.body.classList.add('cur-down'); });
+  document.addEventListener('mouseup', function () { document.body.classList.remove('cur-down'); });
+  document.documentElement.addEventListener('mouseleave', function () { document.body.classList.remove('cur-on'); });
+  document.documentElement.addEventListener('mouseenter', function () { if (shown) document.body.classList.add('cur-on'); });
+})();
+
 // Contact form. Paste your Google Apps Script web app URL (it ends with /exec) between the quotes
 // to make the form send messages to your Google Sheet. While it is empty, the form only writes a
 // message the visitor can copy.
